@@ -835,7 +835,8 @@ MonoBehaviour:
   dodgeDuration: 0.5
   dodgeCooldown: 1
   dodgeCooldownTimer: 0
-  attackStringTime: 1.2
+  attackStringTime: 0.3
+  lightAttackDuration: 0.25
 --- !u!1 &1838775915
 GameObject:
   m_ObjectHideFlags: 0

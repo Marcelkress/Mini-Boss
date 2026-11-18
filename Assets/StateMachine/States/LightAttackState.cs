@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LightAttackState : BaseState
@@ -6,46 +7,45 @@ public class LightAttackState : BaseState
 
     private float attackStringTimer;
     private int attackStringStep;
+    private bool attackQueued;
     
     public override void Enter()
     {
-        Attack();
-        attackStringStep = 1;
+        attackStringStep = 0;
+        player.input.ConsumeLightAttack(); 
+        StartStep();
     }
 
     public override void Update()
     {
         attackStringTimer += Time.deltaTime;
-
-        if (attackStringTimer < player.attackStringTime && player.input.lightAttackPressed)
-        {
-            Attack();
-        }
-        else if (attackStringTimer > player.attackStringTime)
-        {
-            // Somehow wait for end of animation
-            player.ChangeState(new IdleState(player));
-        }
-    }
-
-    public override void FixedUpdate()
-    {
         
+        if (player.input.ConsumeLightAttack())
+            attackQueued = true;
+
+        if (attackStringTimer < player.lightAttackDuration)
+            return;
+
+        if (attackQueued && attackStringStep < 4)
+        {
+            StartStep();
+            return;
+        }
+        
+        bool lastHit = attackStringStep >= 4;
+        
+        if (lastHit || attackStringTimer >= player.lightAttackDuration + player.attackStringTime)
+            base.DefaultStateExit();
     }
 
-    private void Attack()
+    private void StartStep()
     {
         attackStringStep++;
-        attackStringTimer = 0;
-        Debug.Log("Deal damage");
-        // Trigger animation
-        
-        // Somehow wait for end of animation
-        if (attackStringStep >= 3)
-        {
-            player.ChangeState(new IdleState(player));
-        }
+        attackStringTimer = 0f;
+        attackQueued = false;
+        player.animator.SetTrigger("LightAttack");
     }
+    
 
     public override void Exit()
     {

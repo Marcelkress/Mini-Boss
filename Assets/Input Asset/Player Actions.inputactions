@@ -78,6 +78,72 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Controller D-pad",
+                    "id": "42bbb6ca-a267-4fe1-9ff5-5edf7808511a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b9d9056e-c291-47a6-ae33-e3acb049e090",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "51e8d295-269b-4c54-a8c9-132b59ef1a7f",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Controller stick",
+                    "id": "06d6e3af-acd4-4689-9bd6-53370e9f5270",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "01ac1b66-95fa-4175-bf6c-40b1e2a3b7c2",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "16fd3eaa-1281-491d-b98f-6e6919ec4a52",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "70a6504b-029e-49ce-92d8-3be8b3ca4d74",
                     "path": "<Keyboard>/shift",
@@ -101,6 +167,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ac8d2588-c1a1-46dd-9aec-1a4bf3b3102f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a0a49dfc-5a39-4adb-9e57-910b3d3329b3",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -112,8 +189,30 @@
                 },
                 {
                     "name": "",
+                    "id": "7b9c431c-c511-467e-aaab-1f76b801dd4d",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bb9ed0c4-0d8a-49e6-a096-4d491735ff97",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e64da3ad-54ba-4cd8-a54a-8e73e418ac89",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

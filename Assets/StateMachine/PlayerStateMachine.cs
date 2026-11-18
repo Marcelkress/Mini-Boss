@@ -20,9 +20,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     [Header("Attacking")] 
     public float attackStringTime;
+    public float lightAttackDuration;
     
     private BaseState currentState;
-    public PlayerInput input;
+    public PlayerInput input = new();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -78,35 +79,33 @@ public class PlayerStateMachine : MonoBehaviour
     public void OnDodge()
     {
         input.dodgePressed = true;
-
-        StartCoroutine(ResetDodge());
+        
     }
-
-    IEnumerator ResetDodge()
-    {
-        yield return new WaitForEndOfFrame();
-        input.dodgePressed = false;
-    }
-
     public void OnLightAttack()
     {
         input.lightAttackPressed = true;
-
-        StartCoroutine(ResetLightAttack());
-    }
-    
-    IEnumerator ResetLightAttack()
-    {
-        yield return new WaitForEndOfFrame();
-        input.lightAttackPressed = false;
     }
 
     #endregion
 }
 
-public struct PlayerInput
+public class PlayerInput
 {
     public float move;
     public bool dodgePressed;
     public bool lightAttackPressed;
+
+    public bool ConsumeLightAttack()
+    {
+        bool prev = lightAttackPressed;
+        lightAttackPressed = false;
+        return prev;
+    }
+
+    public bool ConsumeDodge()
+    {
+        bool prev = dodgePressed;
+        dodgePressed = false;
+        return prev;
+    }
 }

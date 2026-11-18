@@ -24,6 +24,14 @@ public abstract class BaseState
         
     }
 
+    public virtual void DefaultStateExit()
+    {
+        if(Mathf.Approximately(player.input.move, 0))
+            player.ChangeState(new IdleState(player));
+        else
+            player.ChangeState(new MoveState(player));
+    }
+
     public virtual void Exit()
     {
         // Exit idle state logic
