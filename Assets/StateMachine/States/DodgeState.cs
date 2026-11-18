@@ -3,12 +3,22 @@ using UnityEngine;
 public class DodgeState : BaseState
 {
     public DodgeState(PlayerStateMachine p) : base(p) { }
-
+    
     private float timer;
     
     public override void Enter()
     {
         Debug.Log("Enter Dodge!");
+
+        if (player.dodgeCooldownTimer < player.dodgeCooldown)
+        {
+            // reject enter
+            player.ChangeState(new IdleState(player));
+            return;
+        }
+
+        player.dodgeCooldownTimer = 0;
+        player.animator.SetTrigger("Dodge");
     }
 
     public override void Update()

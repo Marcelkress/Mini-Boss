@@ -10,7 +10,6 @@ public class IdleState : BaseState
 
     public override void Update()
     {
-        
         if (!Mathf.Approximately(player.input.move, 0))
         {
             player.ChangeState(new MoveState(player));
@@ -20,6 +19,12 @@ public class IdleState : BaseState
         if (player.input.dodgePressed)
         {
             player.ChangeState(new DodgeState(player));
+            return;
+        }
+
+        if (player.input.lightAttackPressed)
+        {
+            player.ChangeState(new LightAttackState(player));
             return;
         }
     }

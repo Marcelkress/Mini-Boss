@@ -6,14 +6,20 @@ public class PlayerStateMachine : MonoBehaviour
 {
     [Header("References")]
     public Rigidbody2D rb;
-
+    public Animator animator;
+    
     [Header("Movement")] 
     public float moveSpeed;
-    public bool facingLeft;
+    [HideInInspector] public bool facingLeft;
     
     [Header("Dodge")] 
     public float dodgeSpeed = 2;
     public float dodgeDuration = 1.5f;
+    public float dodgeCooldown = 1f;
+    [HideInInspector] public float dodgeCooldownTimer;
+
+    [Header("Attacking")] 
+    public float attackStringTime;
     
     private BaseState currentState;
     public PlayerInput input;
@@ -21,6 +27,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        dodgeCooldownTimer = 0;
         facingLeft = false;
         ChangeState(new IdleState(this));
     }
@@ -40,13 +47,19 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (input.move > 0.1)
         {
+            if (facingLeft)
+                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
             facingLeft = false;
+            
         }
         else if (input.move < -0.1)
         { 
+            if (!facingLeft)
+                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
             facingLeft = true;
         }
-            
+
+        dodgeCooldownTimer += Time.deltaTime;
         currentState.Update();
     }
 
@@ -75,6 +88,19 @@ public class PlayerStateMachine : MonoBehaviour
         input.dodgePressed = false;
     }
 
+    public void OnLightAttack()
+    {
+        input.lightAttackPressed = true;
+
+        StartCoroutine(ResetLightAttack());
+    }
+    
+    IEnumerator ResetLightAttack()
+    {
+        yield return new WaitForEndOfFrame();
+        input.lightAttackPressed = false;
+    }
+
     #endregion
 }
 
@@ -82,4 +108,5 @@ public struct PlayerInput
 {
     public float move;
     public bool dodgePressed;
+    public bool lightAttackPressed;
 }

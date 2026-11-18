@@ -7,6 +7,7 @@ public class MoveState : BaseState
     public override void Enter()
     {
         Debug.Log("Enter moving!");
+        player.animator.SetBool("Run", true);
     }
 
     public override void Update()
@@ -22,6 +23,12 @@ public class MoveState : BaseState
             player.ChangeState(new DodgeState(player));
             return;
         }
+        
+        if (player.input.lightAttackPressed)
+        {
+            player.ChangeState(new LightAttackState(player));
+            return;
+        }
     }
 
     public override void FixedUpdate()
@@ -34,5 +41,6 @@ public class MoveState : BaseState
     public override void Exit()
     { 
         Debug.Log("Exit moving!");
+        player.animator.SetBool("Run", false);
     }
 }
