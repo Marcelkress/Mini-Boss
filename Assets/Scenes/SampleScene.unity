@@ -832,11 +832,19 @@ MonoBehaviour:
   moveSpeed: 7
   facingLeft: 0
   dodgeSpeed: 8
-  dodgeDuration: 0.5
+  dodgeDuration: 0.8
   dodgeCooldown: 1
   dodgeCooldownTimer: 0
-  attackStringTime: 0.3
-  lightAttackDuration: 0.25
+  idleAnim: Idle
+  movingAnim: Moving
+  dodgeAnim: Dodge
+  healAnim: Heal
+  lightAttackOneAnim: Light 1
+  lightAttackTwoAnim: Light 2
+  lightAttackThreeAnim: Light 3
+  heavyAttackOneAnim: Heavy 1
+  heavyAttackTwoAnim: Heavy 2
+  heavyAttackThreeAnim: Heavy 3
 --- !u!1 &1838775915
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +993,7 @@ Animator:
   m_GameObject: {fileID: 6315297320185369432}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2525d229a0f374bae8459bd962cfc86d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 978149a2b17af45059937b7d4d39b93a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -5,33 +5,18 @@ public class IdleState : BaseState
     
     public override void Enter()
     {
-        Debug.Log("Enter Idle!");
+        //Debug.Log("Enter Idle!");
+        player.animator.Play(player.idleAnim);
     }
 
     public override void Update()
     {
-        if (!Mathf.Approximately(player.input.move, 0))
-        {
-            player.ChangeState(new MoveState(player));
-            return;
-        }
-
-        if (player.input.dodgePressed)
-        {
-            player.ChangeState(new DodgeState(player));
-            return;
-        }
-
-        if (player.input.lightAttackPressed)
-        {
-            player.ChangeState(new LightAttackState(player));
-            return;
-        }
+        base.DefaultStateExitCheck();
     }
 
     public override void Exit()
     {
         // Exit state logic
-        Debug.Log("Exit Idle!");
+        //Debug.Log("Exit Idle!");
     }
 }

@@ -6,41 +6,26 @@ public class MoveState : BaseState
 
     public override void Enter()
     {
-        Debug.Log("Enter moving!");
-        player.animator.SetBool("Run", true);
+        //Debug.Log("Enter moving!");
+        //player.animator.SetBool("Run", true);
+        player.animator.Play(player.movingAnim);
     }
 
     public override void Update()
     {
-        if (Mathf.Approximately(player.input.move, 0))
-        {
-            player.ChangeState(new IdleState(player));
-            return;
-        }
-        
-        if (player.input.dodgePressed)
-        {
-            player.ChangeState(new DodgeState(player));
-            return;
-        }
-        
-        if (player.input.lightAttackPressed)
-        {
-            player.ChangeState(new LightAttackState(player));
-            return;
-        }
+        base.DefaultStateExitCheck();
     }
 
     public override void FixedUpdate()
     {
-        Vector2 newPos = new Vector2(player.transform.position.x + player.input.move * player.moveSpeed * Time.deltaTime, player.transform.position.y) ;
+        Vector2 newPos = new Vector2(player.transform.position.x + Mathf.Sign(player.input.move) * player.moveSpeed * Time.deltaTime, player.transform.position.y) ;
         
         player.rb.MovePosition(newPos);
     }
 
     public override void Exit()
     { 
-        Debug.Log("Exit moving!");
+       // Debug.Log("Exit moving!");
         player.animator.SetBool("Run", false);
     }
 }

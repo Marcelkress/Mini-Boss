@@ -19,10 +19,15 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public float dodgeCooldownTimer;
 
     [Header("Attacking")] 
-    public float attackStringTime;
-    public float lightAttackDuration;
+   
+    [Header("Animation state names")] 
+    public string idleAnim;
+    public string movingAnim, dodgeAnim, healAnim;
+    public string lightAttackOneAnim, lightAttackTwoAnim, lightAttackThreeAnim;
+    public string heavyAttackOneAnim, heavyAttackTwoAnim, heavyAttackThreeAnim;
     
     private BaseState currentState;
+    private bool dirSwitchLock;
     public PlayerInput input = new();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +51,21 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
+        dodgeCooldownTimer += Time.deltaTime;
+        SwitchFacingDirection();
+        currentState.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
+
+    private void SwitchFacingDirection()
+    {
+        if (dirSwitchLock)
+            return;
+        
         if (input.move > 0.1)
         {
             if (facingLeft)
@@ -59,14 +79,11 @@ public class PlayerStateMachine : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y);
             facingLeft = true;
         }
-
-        dodgeCooldownTimer += Time.deltaTime;
-        currentState.Update();
     }
 
-    private void FixedUpdate()
+    public void LockDirectionSwitch(bool lockVal)
     {
-        currentState.FixedUpdate();
+        dirSwitchLock = lockVal;
     }
     
     #region  InputMethods
@@ -79,11 +96,21 @@ public class PlayerStateMachine : MonoBehaviour
     public void OnDodge()
     {
         input.dodgePressed = true;
-        
     }
+
+    public void OnHeavyAttack()
+    {
+        input.heavyAttackPressed = true;
+    }
+    
     public void OnLightAttack()
     {
         input.lightAttackPressed = true;
+    }
+
+    public void OnHeal()
+    {
+        input.healPressed = true;
     }
 
     #endregion
@@ -94,6 +121,20 @@ public class PlayerInput
     public float move;
     public bool dodgePressed;
     public bool lightAttackPressed;
+    public bool heavyAttackPressed;
+    public bool healPressed;
+
+    public void ConsumeHeal()
+    {
+        healPressed = false;
+    }
+    
+    public bool ConsumeHeavyAttack()
+    {
+        bool prev = heavyAttackPressed;
+        heavyAttackPressed = false;
+        return prev;
+    }
 
     public bool ConsumeLightAttack()
     {
@@ -102,10 +143,10 @@ public class PlayerInput
         return prev;
     }
 
-    public bool ConsumeDodge()
+    public void ConsumeDodge()
     {
-        bool prev = dodgePressed;
+        //bool prev = dodgePressed;
         dodgePressed = false;
-        return prev;
+        //return prev;
     }
 }

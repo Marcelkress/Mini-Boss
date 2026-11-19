@@ -9,21 +9,22 @@ public class DodgeState : BaseState
     
     public override void Enter()
     {
-        Debug.Log("Enter Dodge!");
-
-        player.input.ConsumeDodge();
-        
-        dir = player.facingLeft ? -1 : 1;
-
+        //Debug.Log("Enter Dodge!");
         if (player.dodgeCooldownTimer < player.dodgeCooldown)
         {
             // reject enter
-            base.DefaultStateExit();
+            base.DefaultStateExitCheck();
             return;
         }
+        
+        player.input.ConsumeDodge();
+        
+        //player.animator.SetTrigger("Dodge");
+        player.animator.Play(player.dodgeAnim);
+        
+        dir = player.facingLeft ? -1 : 1;
 
         player.dodgeCooldownTimer = 0;
-        player.animator.SetTrigger("Dodge");
     }
 
     public override void Update()
@@ -37,8 +38,7 @@ public class DodgeState : BaseState
 
         if (timer > player.dodgeDuration)
         {
-            base.DefaultStateExit();
-            
+            base.DefaultStateExitCheck();
             return;
         }
         
@@ -48,8 +48,6 @@ public class DodgeState : BaseState
         player.rb.MovePosition(newPos);
     }
     
-    
-
     public override void Exit()
     {
         

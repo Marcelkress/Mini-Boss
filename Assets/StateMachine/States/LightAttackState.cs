@@ -8,9 +8,11 @@ public class LightAttackState : BaseState
     private float attackStringTimer;
     private int attackStringStep;
     private bool attackQueued;
+    private AnimatorClipInfo[] info;
     
     public override void Enter()
     {
+        player.LockDirectionSwitch(true);
         attackStringStep = 0;
         player.input.ConsumeLightAttack(); 
         StartStep();
@@ -22,8 +24,11 @@ public class LightAttackState : BaseState
         
         if (player.input.ConsumeLightAttack())
             attackQueued = true;
-
-        if (attackStringTimer < player.lightAttackDuration)
+        
+        info = player.animator.GetCurrentAnimatorClipInfo(0);
+        float clipLength = info[0].clip.length;
+        
+        if (attackStringTimer < clipLength)
             return;
 
         if (attackQueued && attackStringStep < 4)
@@ -33,9 +38,11 @@ public class LightAttackState : BaseState
         }
         
         bool lastHit = attackStringStep >= 4;
-        
-        if (lastHit || attackStringTimer >= player.lightAttackDuration + player.attackStringTime)
-            base.DefaultStateExit();
+
+        if (lastHit || attackStringTimer >= clipLength)
+        {
+            base.DefaultStateExitCheck();
+        }
     }
 
     private void StartStep()
@@ -43,12 +50,26 @@ public class LightAttackState : BaseState
         attackStringStep++;
         attackStringTimer = 0f;
         attackQueued = false;
-        player.animator.SetTrigger("LightAttack");
+        //player.animator.SetTrigger("LightAttack");
+
+        switch (attackStringStep)
+        {
+            case 1:
+                player.animator.Play(player.lightAttackOneAnim);
+                break;
+            case 2:
+                player.animator.Play(player.lightAttackTwoAnim);
+                break;
+            case 3:
+                player.animator.Play(player.lightAttackThreeAnim);
+                break;
+        }
     }
     
 
     public override void Exit()
     {
-        Debug.Log("Exit light attack state!");
+        player.LockDirectionSwitch(false);
+        //Debug.Log("Exit light attack state!");
     }
 }
