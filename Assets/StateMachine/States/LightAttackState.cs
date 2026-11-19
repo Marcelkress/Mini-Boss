@@ -39,9 +39,9 @@ public class LightAttackState : BaseState
         
         bool lastHit = attackStringStep >= 4;
 
-        if (lastHit || attackStringTimer >= clipLength)
+        if (lastHit || attackStringTimer >= clipLength + player.endOfAttackInputBuffer)
         {
-            base.DefaultStateExitCheck();
+            DefaultStateExitCheck();
         }
     }
 

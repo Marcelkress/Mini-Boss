@@ -5,13 +5,13 @@ public class IdleState : BaseState
     
     public override void Enter()
     {
-        //Debug.Log("Enter Idle!");
+        Debug.Log("Enter Idle!");
         player.animator.Play(player.idleAnim);
     }
 
     public override void Update()
     {
-        base.DefaultStateExitCheck();
+        DefaultStateExitCheck();
     }
 
     public override void Exit()

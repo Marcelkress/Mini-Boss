@@ -43,9 +43,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SpecialAttack",
+                    "type": "Button",
+                    "id": "588ff5b0-20bf-4b63-9e56-c0fedc459b87",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Heal",
                     "type": "Button",
                     "id": "26c3d2f2-403f-4b69-91de-b8afb313a4c4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HurtTest",
+                    "type": "Button",
+                    "id": "6584deb3-8085-4ebd-ae37-1232df3801f6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -54,7 +72,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Keyboard",
+                    "name": "Keyboard AD",
                     "id": "f165d00f-7484-47f8-94ee-bfe0954ba213",
                     "path": "1DAxis",
                     "interactions": "",
@@ -79,6 +97,39 @@
                     "name": "positive",
                     "id": "87010d8b-1afc-42c5-b223-5f060cc07500",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Keyboard arrows",
+                    "id": "9c5afb92-94cc-4d7d-9e3e-4581aaff70e7",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c2892845-a3eb-47fd-b600-d97700025b51",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "5557ba60-3a8b-4c24-b140-eee0968c6edd",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -250,6 +301,39 @@
                     "action": "Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4eb1020-9f7a-4bc0-953f-7f01debb049f",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HurtTest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07249981-2921-4d8d-a09d-cf6631c2f2e7",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c3d1a89-f8d2-45e7-9787-a66970e0e226",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -265,6 +349,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "f052c61c-659a-494d-a46e-1f213334be46",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -322,6 +415,28 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0f913922-8c46-4c70-bb23-d0bec3feaff5",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63420b11-7e7b-45c8-9220-ee64a7cae31d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

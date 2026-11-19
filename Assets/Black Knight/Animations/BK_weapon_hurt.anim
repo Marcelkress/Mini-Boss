@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BK_weapon_hurt
-  serializedVersion: 8
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -22,20 +22,20 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 1311451977, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
-    - time: 0.06666667
+    - time: 0.083333336
       value: {fileID: 801867840, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
-    - time: 0.13333334
+    - time: 0.18333334
       value: {fileID: 486139562, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
-    - time: 0.2
-      value: {fileID: -369642358, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
     - time: 0.26666668
+      value: {fileID: -369642358, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
+    - time: 0.35
       value: {fileID: -1241761472, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 15
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -51,7 +51,6 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-      metaData: 0
     pptrCurveMapping:
     - {fileID: 1311451977, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
     - {fileID: 801867840, guid: 6a59ce8e757dafe429f1182cf98b33b0, type: 3}
@@ -63,7 +62,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.36666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

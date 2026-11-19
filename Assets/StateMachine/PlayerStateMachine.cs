@@ -7,6 +7,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
     public Animator animator;
+    public PlayerHealth health;
     
     [Header("Movement")] 
     public float moveSpeed;
@@ -14,15 +15,16 @@ public class PlayerStateMachine : MonoBehaviour
     
     [Header("Dodge")] 
     public float dodgeSpeed = 2;
-    public float dodgeDuration = 1.5f;
     public float dodgeCooldown = 1f;
     [HideInInspector] public float dodgeCooldownTimer;
 
-    [Header("Attacking")] 
-   
+    [Header("Attack")] 
+    public float endOfAttackInputBuffer;
+    
     [Header("Animation state names")] 
     public string idleAnim;
-    public string movingAnim, dodgeAnim, healAnim;
+    public string movingAnim, dodgeAnim, healAnim, healFailAnim, hurtAnim, deathAnim;
+    public string specialAttackAnim;
     public string lightAttackOneAnim, lightAttackTwoAnim, lightAttackThreeAnim;
     public string heavyAttackOneAnim, heavyAttackTwoAnim, heavyAttackThreeAnim;
     
@@ -54,6 +56,7 @@ public class PlayerStateMachine : MonoBehaviour
         dodgeCooldownTimer += Time.deltaTime;
         SwitchFacingDirection();
         currentState.Update();
+        currentState.BaseUpdate();
     }
 
     private void FixedUpdate()
@@ -113,6 +116,17 @@ public class PlayerStateMachine : MonoBehaviour
         input.healPressed = true;
     }
 
+    public void OnHurtTest()
+    {
+        PlayerHealth health = GetComponent<PlayerHealth>();
+        health.TakeDamage(20);
+    }
+
+    public void OnSpecialAttack()
+    {
+        input.specialAttackPressed = true;
+    }
+
     #endregion
 }
 
@@ -122,8 +136,14 @@ public class PlayerInput
     public bool dodgePressed;
     public bool lightAttackPressed;
     public bool heavyAttackPressed;
+    public bool specialAttackPressed;
     public bool healPressed;
 
+    public void ConsumeSpecialAttack()
+    {
+        specialAttackPressed = false;
+    }
+    
     public void ConsumeHeal()
     {
         healPressed = false;

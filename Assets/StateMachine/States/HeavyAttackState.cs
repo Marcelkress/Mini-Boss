@@ -40,7 +40,7 @@ public class HeavyAttackState : BaseState
         
         bool lastHit = attackStringStep >= 4;
 
-        if (lastHit || attackStringTimer >= clipLength)
+        if (lastHit || attackStringTimer >= clipLength + player.endOfAttackInputBuffer)
         {
             if (player.input.dodgePressed)
             {
@@ -48,7 +48,7 @@ public class HeavyAttackState : BaseState
                 return;
             }
             
-            base.DefaultStateExitCheck();
+            DefaultStateExitCheck();
         }
     }
 
@@ -57,7 +57,6 @@ public class HeavyAttackState : BaseState
         attackStringStep++;
         attackStringTimer = 0f;
         attackQueued = false;
-        //player.animator.SetTrigger("HeavyAttack");
         
         switch (attackStringStep)
         {
@@ -78,6 +77,5 @@ public class HeavyAttackState : BaseState
     public override void Exit()
     {
         player.LockDirectionSwitch(false);
-        //Debug.Log("Exit light attack state!");
     }
 }
