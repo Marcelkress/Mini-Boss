@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class PlayerStateMachine : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public PlayerHealth health;
+
+    [Header("Input settings")] 
+    [SerializeField] private float inputBuffer;
     
     [Header("Movement")] 
     public float moveSpeed;
@@ -31,7 +35,8 @@ public class PlayerStateMachine : MonoBehaviour
     
     private PlayerBaseState currentState;
     private bool dirSwitchLock;
-    public PlayerInput input = new();
+    public Input input = new();
+    private float bufferTimer;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,6 +62,22 @@ public class PlayerStateMachine : MonoBehaviour
         dodgeCooldownTimer += Time.deltaTime;
         currentState.Update();
         currentState.BaseUpdate();
+        InputBuffer();
+    }
+
+    private void InputBuffer()
+    {
+        // When a certain amount of time has passed since the last input, we want to clear it so we don't queue too many inputs
+        if (input.newInput)
+        {
+            bufferTimer += Time.deltaTime;
+
+            if (bufferTimer > inputBuffer)
+            {
+                input.ClearAll();
+                bufferTimer = 0;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -105,21 +126,25 @@ public class PlayerStateMachine : MonoBehaviour
     public void OnDodge()
     {
         input.dodgePressed = true;
+        input.newInput = true;
     }
 
     public void OnHeavyAttack()
     {
         input.heavyAttackPressed = true;
+        input.newInput = true;
     }
     
     public void OnLightAttack()
     {
         input.lightAttackPressed = true;
+        input.newInput = true;
     }
 
     public void OnHeal()
     {
         input.healPressed = true;
+        input.newInput = true;
     }
 
     public void OnHurtTest()
@@ -131,13 +156,16 @@ public class PlayerStateMachine : MonoBehaviour
     public void OnSpecialAttack()
     {
         input.specialAttackPressed = true;
+        input.newInput = true;
     }
 
     #endregion
 }
 
-public class PlayerInput
+public class Input
 {
+    public bool newInput;
+    
     public float move;
     public bool dodgePressed;
     public bool lightAttackPressed;
@@ -174,5 +202,10 @@ public class PlayerInput
         //bool prev = dodgePressed;
         dodgePressed = false;
         //return prev;
+    }
+
+    public void ClearAll()
+    {
+        dodgePressed = lightAttackPressed = healPressed = heavyAttackPressed = specialAttackPressed = false;
     }
 }

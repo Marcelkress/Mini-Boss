@@ -344,15 +344,16 @@ MonoBehaviour:
   rb: {fileID: 31155609632015561}
   animator: {fileID: 2770348304784219723}
   health: {fileID: 4646578371427476628}
+  inputBuffer: 0.8
   moveSpeed: 5
   facingLeft: 0
   dodgeSpeed: 10
-  dodgeCooldown: 1
+  dodgeCooldown: 0.8
   dodgeCooldownTimer: 0
   endOfAttackInputBuffer: 0.1
-  lightAttackDamage: 0
-  heavyAttackDamage: 0
-  specialAttackDamage: 0
+  lightAttackDamage: 2
+  heavyAttackDamage: 3
+  specialAttackDamage: 5
   idleAnim: Idle
   movingAnim: Moving
   dodgeAnim: Dodge
@@ -392,4 +393,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  player: {fileID: 0}
+  player: {fileID: 7547714498427672906}
