@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject[] flaskElements;
     
     private int healFlasksLeft;
-    private PlayerStateMachine player;
+    public PlayerStateMachine player;
     private bool isInvincible;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

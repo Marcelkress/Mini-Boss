@@ -1,0 +1,82 @@
+using System.Collections;
+using UnityEngine;
+
+public class HeavyAttackState : PlayerBaseState
+{
+    public HeavyAttackState(PlayerStateMachine p) : base(p) { }
+
+    private float attackStringTimer;
+    private int attackStringStep;
+    private bool attackQueued;
+
+    private AnimatorClipInfo[] info;
+    
+    public override void Enter()
+    {
+        player.SwitchFacingDirection();
+        player.LockDirectionSwitch(true);
+        attackStringStep = 0;
+        player.input.ConsumeHeavyAttack(); 
+        StartStep();
+    }
+
+    public override void Update()
+    {
+        attackStringTimer += Time.deltaTime;
+        
+        if (player.input.ConsumeHeavyAttack())
+            attackQueued = true;
+
+        info = player.animator.GetCurrentAnimatorClipInfo(0);
+        float clipLength = info[0].clip.length;
+        
+        if (attackStringTimer < clipLength)
+            return;
+
+        if (attackQueued && attackStringStep < 4)
+        {
+            StartStep();
+            return;
+        }
+        
+        bool lastHit = attackStringStep >= 4;
+
+        if (lastHit || attackStringTimer >= clipLength + player.endOfAttackInputBuffer)
+        {
+            if (player.input.dodgePressed)
+            {
+                player.ChangeState(new DodgeState(player));
+                return;
+            }
+            
+            DefaultStateExitCheck();
+        }
+    }
+
+    private void StartStep()
+    {
+        attackStringStep++;
+        attackStringTimer = 0f;
+        attackQueued = false;
+        
+        switch (attackStringStep)
+        {
+            case 1:
+                player.animator.Play(player.heavyAttackOneAnim);
+                break;
+            case 2:
+                player.animator.Play(player.heavyAttackTwoAnim);
+                break;
+            case 3:
+                player.animator.Play(player.heavyAttackThreeAnim);
+                break;
+        }
+        
+    }
+    
+
+    public override void Exit()
+    {
+        player.LockDirectionSwitch(false);
+    }
+}
