@@ -25,7 +25,12 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth -= damage;
         UpdateUI();
-        bossStateMachine.ChangeState(new BossHurtState(bossStateMachine));
+
+        if (bossStateMachine.currentState is not BossAttackOneState && bossStateMachine.currentState is not BossAttackTwoState)
+        {
+            bossStateMachine.ChangeState(new BossHurtState(bossStateMachine));
+        }
+        
     }
 
     void UpdateUI()

@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     
     private int healFlasksLeft;
     public PlayerStateMachine player;
-    private bool isInvincible;
+    public bool isInvincible;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

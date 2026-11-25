@@ -94,7 +94,7 @@ AnimationClip:
   - time: 0.13333334
     functionName: Attack
     data: 
-    objectReferenceParameter: {fileID: 7761695496076790285, guid: 34ab4c9c2fe5145c8aa83a3cb9a48006, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 1
     messageOptions: 0

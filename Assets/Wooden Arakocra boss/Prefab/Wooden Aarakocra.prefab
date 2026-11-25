@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1290520127288052778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 167423347087373719}
+  m_Layer: 6
+  m_Name: Attack Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &167423347087373719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290520127288052778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: -0.155, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1766205108767134039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7303430041946652916
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +45,7 @@ GameObject:
   - component: {fileID: 1519716138497827940}
   - component: {fileID: 3651341711621410167}
   - component: {fileID: 2146101680456278540}
+  - component: {fileID: 6347554653172260374}
   m_Layer: 6
   m_Name: Wooden Aarakocra
   m_TagString: Untagged
@@ -33,7 +65,8 @@ Transform:
   m_LocalPosition: {x: -0.30519497, y: -0.2624919, z: 0.087944955}
   m_LocalScale: {x: 3.6268108, y: 3.6268108, z: 3.6268108}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 167423347087373719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8083765816775874636
@@ -136,8 +169,12 @@ MonoBehaviour:
   attackOneAnim: Attack 1
   attackTwoAnim: Attack 2
   takeDamageAnim: Take Damage
-  maxDistanceToPlayer: 8
+  maxDistanceToPlayer: 5
   moveSpeed: 3
+  attackChainChance: 0
+  attackWeight: 1.52
+  maxTimeBetweenAttack: 2
+  attackDistance: 6
 --- !u!114 &3651341711621410167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +229,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0000028924635, y: -0.0049919975}
   m_Size: {x: 1.503755, y: 2.2925704}
   m_Direction: 0
+--- !u!114 &6347554653172260374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303430041946652916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce399fcb590b74e1e9ac738870a933a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  attackOriginPoint: {fileID: 167423347087373719}
+  attackRadius: 6
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
