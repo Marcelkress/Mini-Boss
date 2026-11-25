@@ -6,7 +6,7 @@ public class BossStateMachine : MonoBehaviour
 {
     [Header("References")] 
     public Animator animator;
-    public GameObject player;
+    public PlayerStateMachine player;
     public SpriteRenderer sprite;
     
     [Header("Animation state names")] 
@@ -49,7 +49,7 @@ public class BossStateMachine : MonoBehaviour
         idleTimer += Time.deltaTime;
         
         // If certain amount of time has passed AND the boss is within distance to the player
-        if (idleTimer > timeUntilNextAttack && WithinDistanceToPlayer())
+        if (idleTimer > timeUntilNextAttack && WithinDistanceToPlayer() && !player.health.isDead)
         {
             // Choose random attack 
             float rand = Random.value + 1;

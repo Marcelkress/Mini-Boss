@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     public float sliderDuration = 0.5f;
     public GameObject[] flaskElements;
+    public RetryUI retryUI;
     
     private int healFlasksLeft;
     public PlayerStateMachine player;
@@ -64,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
-            Debug.Log("DEAD!");
+            retryUI.EnableRetryUI();
         }
     }
 
